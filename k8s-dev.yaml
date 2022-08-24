@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: query-classifier
-  namespace: gpt-workplace
+  namespace: adrian-playground
 spec:
   selector:
     matchLabels:
@@ -13,8 +13,8 @@ spec:
         app: query-classifier
     spec:
       containers:
-      - name: nlp-dashboard-testing
-        image: nlp-dashboard-testing
+      - name: nlp-sectorsearch
+        image: nlp-sectorsearch
         resources:
           limits:
             memory: "2Gi"
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: query-classifier
-  namespace: gpt-workplace
+  namespace: adrian-playground
 spec:
   type: LoadBalancer
   selector:

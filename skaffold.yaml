@@ -1,13 +1,23 @@
 apiVersion: skaffold/v2beta29
 kind: Config
 metadata:
-  name: dashboard
+  name: sectorsearch
 build:
   artifacts:
-  - image: nlp-dashboard
+  - image: nlp-sectorsearch
     docker:
       dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
     - k8s.yaml
+
+profiles:
+  - name: nlp-sectorsearch-dev
+    activation:
+    - kubeContext: nlp-omnisearch-dev
+    - command: dev
+    deploy:
+      kubectl:
+        manifests:
+          - k8s-dev.yaml

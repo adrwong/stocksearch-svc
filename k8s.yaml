@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: query-classifier
+  name: query-sectorsearch
   namespace: toys
 spec:
   selector:
     matchLabels:
-      app: query-classifier
+      app: query-sectorsearch
   template:
     metadata:
       labels:
-        app: query-classifier
+        app: query-sectorsearch
     spec:
       containers:
-      - name: nlp-dashboard
-        image: nlp-dashboard
+      - name: nlp-sectorsearch
+        image: nlp-sectorsearch
         resources:
           limits:
             memory: "2Gi"
@@ -26,12 +26,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: query-classifier
+  name: query-sectorsearch
   namespace: toys
 spec:
   type: LoadBalancer
   selector:
-    app: query-classifier
+    app: query-sectorsearch
   ports:
   - port: 80
     targetPort: 8051

@@ -14,18 +14,18 @@ auth = session.post(end_point)
 logger = LoraLogger.logger(__name__, INFO)
 
 
-def construct_data(input):
+def construct_data(input, datastream):
     constructed = input
-    
-    constructed['target_address'] = 'http://192.168.1.152:9200/user-query-log-stocksearch/'
+
+    constructed['target_address'] = 'http://192.168.1.152:9200/'+datastream+'/'
     constructed['@timestamp'] = (datetime.utcnow() -
                                  datetime.utcfromtimestamp(0)).total_seconds() * 1000.0
 
     return constructed
 
 
-def send(data, session=session):
+def send(data, datastream, session=session):
     resp = session.post(
-        url='http://192.168.1.152:9200/user-query-log-stocksearch/_doc', json=construct_data(data))
+        url='http://192.168.1.152:9200/'+datastream+'/_doc', json=construct_data(data, datastream))
 
     return resp
